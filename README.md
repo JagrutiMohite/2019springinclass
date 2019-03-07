@@ -1,4 +1,4 @@
-# 2019spring.vue
+# 2019springinclass
 
 ## Project setup
 ```
