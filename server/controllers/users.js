@@ -20,8 +20,9 @@ app.get("/:id", (req, res) => {
 
 });
 app.post("/", (req, res) => {
+
+    console.log(req.body);
     user.add(req.body, (err, data) => {
-        console.log(req.body);
         if(err) throw err;
         res.send(data);
     });
