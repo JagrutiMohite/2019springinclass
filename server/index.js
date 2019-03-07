@@ -1,7 +1,16 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express   = require('express');
+const path      = require('path');
+const users     = require('./controllers/users');
 
-app.get('/', (req, res) => res.send('Hello World!'))
+const app = express();
+const port = 3000;
 
-app.listen(port, () => console.log(`Example app http://localhost${port}!`))
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../NoFramework")));
+app.get('/', (req, res) => res.send('Hello World!'));
+app.use('/users', users);
+
+
+
+app.listen(port, () => console.log(`Example app http://localhost:${port}`));
