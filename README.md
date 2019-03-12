@@ -1,4 +1,4 @@
-# 2019springinclass
+# vue2
 
 ## Project setup
 ```

@@ -1,10 +1,12 @@
 {
   "name": "2019springinclass",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "start": "nodemon server/index.js --watch server"
   },
   "repository": {
     "type": "git",
@@ -16,15 +18,35 @@
     "express": "^4.16.4",
     "express.js": "^1.0.0",
     "mysql": "^2.16.0",
-    "vue": "^3.4.1",
-    "vue-router": "^3.0.1"
+    "vue": "^2.6.8",
+    "vue-router": "^3.0.1",
+    "bootstrap": "^4.3.1"
   },
   "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
     "@vue/cli-service": "^3.4.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21",
     "nodemon": "^1.18.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
   },
   "postcss": {
     "plugins": {
