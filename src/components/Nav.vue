@@ -19,24 +19,26 @@
                     <router-link class="nav-link disabled" to="#">Disabled</router-link>
                 </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0" v-if="!user">
+                <form class="form-inline mt-2 mt-md-0" v-if="!Globals.user">
                 <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
                 <a href="#" class="nav-link" @click.prevent="login">LogIn</a>
                 <a href="#" class="nav-link">SignUp</a>
                 </form>
-                <span class="navbar-text" v-if="user">Welcome {{user.name}}</span>
+                <span class="navbar-text" v-if="Globals.user">Welcome {{Globals.user.name}}</span>
             </div>
         </nav> 
 </template>
 <script>
+import { login, Globals } from "@/models/api";
+
 export default {
     data: () => ({
-        user: null
+        Globals: Globals
     }),
     methods: {
-        login () {
-            this.user = { name: "Meto" };
+        login() {
+           login();
         }
     }
 }
