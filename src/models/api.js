@@ -27,7 +27,7 @@ export async function api(url, data){
         })
     }
     if(!response.ok){
-        throw await  response.json(); // parses JSON response into native Javascript objects
+        throw await response.json();
     }
-    return await  response.json();
+    return await response.json();
 }
