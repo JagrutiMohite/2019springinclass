@@ -19,7 +19,6 @@ app.post("/", (req, res, next) => {
     .catch(next)
 });
 app.post("/login", (req, res, next) => {
-    //console.log({body: req.body})
     user.login(req.body.email, req.body.password)
     .then(x=>  res.send(x) )
     .catch(next)
@@ -30,4 +29,4 @@ app.post("/changePassword", (req, res, next) => {
     .catch(next)
 });
 
-module.exports = app;
+module.exports = app

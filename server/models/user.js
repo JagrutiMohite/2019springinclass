@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const SALT_ROUNDS = 8;
 const JWT_SECRET = process.env.JWT_SECRET || 'some long string..';
 
-
 const model = {
     async getAll(){
         return await conn.query("SELECT * FROM 2019Spring_Persons");   
@@ -27,7 +26,7 @@ const model = {
         const hashedPassword = await bcrypt.hash(input.Password, SALT_ROUNDS)
         const data = await conn.query(
             "INSERT INTO 2019Spring_Persons (FirstName,LastName,Birthday,Password,created_at) VALUES (?)",
-            [[input.FirstName, input.LastName, input.Email, input.Birthday, hashedPassword, new Date()]] 
+            [[input.FirstName, input.LastName, input.Birthday, hashedPassword, new Date()]] 
         );
         return await model.get(data.insertId);
     },
@@ -35,6 +34,7 @@ const model = {
         return jwt.verify(token, JWT_SECRET);
     },
     async login(email, password){
+        //console.log({ email, password })
         const data = await conn.query(`SELECT * FROM 2019Spring_Persons P
                         Join 2019Spring_ContactMethods CM On CM.Person_Id = P.id
                     WHERE CM.Value=?`, email);
@@ -69,3 +69,4 @@ const model = {
 };
 
 module.exports = model;
+ss
