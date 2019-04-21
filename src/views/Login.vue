@@ -21,7 +21,7 @@
             <form @submit.prevent="submit">
                 <div class="form-group">
                   <label for="Email">Email</label>
-                  <input type="text" v-model="data.email"
+                  <input type="text" v-model="data.Email"
                     class="form-control" name="Email" id="Email" aria-describedby="helpEmail" placeholder="Email">
                   <small id="helpEmail" class="form-text text-muted">You can use any email that you've use on our site</small>
                 </div>
@@ -30,21 +30,13 @@
                   <input type="password" v-model="data.password"
                     class="form-control" name="Password" id="Password" placeholder="Password">
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-success">Login</button>
             </form>
+            <br />
+            <button class="btn btn-primary btn-block" @click.prevent="facebookLogin">Log in with Facebook</button>
         </div>
       </div>
     </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="card border-success" v-if="newUser">
-        <div class="card-body">
-          <h4 class="card-title">Congrats! You've Registered</h4>
-          <p class="card-text">
-            {{newUser.FirstName}} {{newUser.LastName}} 
-          </p>
-        </div>
-      </div>
     </div>
 </div>
 </template>
@@ -53,7 +45,7 @@
 import { Globals } from "@/models/api";
 import { Login } from "@/models/users";
 import toastr from 'toastr';
-import 'toastr/build/toastr.css';
+import * as fb from "@/models/facebook";
 export default {
     data: ()=> ({
         data: {},
@@ -63,14 +55,17 @@ export default {
         async submit(){
             try {
               const m = await Login(this.data);
-              this.newUser = m.user;
-              Globals.user = m.user;
-              Globals.token = m.token;
+              this.$router.push(Globals.redirectRoute)
               toastr.success("You've logged in successfully!")
             } catch (error) {
               Globals.errors.push(error);
-              toastr.error(error.msg);
+              toastr.error(error.message);
             }
+        },
+        async facebookLogin(){
+          const m = await fb.Login();
+          console.log( {m} );
+          Globals.user = { FirstName: m.name, Email: m.email }
         }
     }
 }

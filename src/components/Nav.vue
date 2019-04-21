@@ -22,15 +22,15 @@
                 <form class="form-inline mt-2 mt-md-0" v-if="!Globals.user">
                 <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-                <a href="#" class="nav-link" @click.prevent="login">LogIn</a>
-                <a href="#" class="nav-link">SignUp</a>
+                <router-link to="/Login" class="nav-link">Login</router-link>
+                <router-link to="/Register" class="nav-link">Sign Up</router-link>
                 </form>
                 <span class="navbar-text" v-if="Globals.user">Welcome {{Globals.user.FirstName}} {{Globals.user.LastName}}</span>
             </div>
         </nav> 
 </template>
 <script>
-import { login, Globals } from "@/models/api";
+import { Globals } from "@/models/api";
 
 export default {
     data: () => ({

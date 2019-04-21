@@ -27,7 +27,7 @@ const model = {
         const hashedPassword = await bcrypt.hash(input.Password, SALT_ROUNDS)
         const data = await conn.query(
             "INSERT INTO 2019Spring_Persons (FirstName,LastName,Birthday,Password,created_at) VALUES (?)",
-            [[input.FirstName, input.LastName, input.Birthday, hashedPassword, new Date()]] 
+            [[input.FirstName, input.LastName, input.Email, input.Birthday, hashedPassword, new Date()]] 
         );
         return await model.get(data.insertId);
     },
@@ -61,7 +61,7 @@ const model = {
             await conn.query(`Update 2019Spring_Persons P
                             Set ?
                         WHERE P.id=?`,[ {Password: hashedPassword }, data[0].id]);
-            return { status: "success", msg: "Password Succesfully Changed" };
+            return { status: "success", message: "Password Succesfully Changed" };
         }else{
             throw Error('Wrong Password');
         }

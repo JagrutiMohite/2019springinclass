@@ -36,6 +36,12 @@
                   <input type="password" v-model="data.Password" class="form-control" name="Password" id="Password" placeholder="Password">
                 </div>
                 <div class="form-group">
+                  <label for="Email">Email</label>
+                  <input type="text" v-model="data.Email"
+                    class="form-control" name="Email" id="Email" aria-describedby="helpEmail" placeholder="Email">
+                  <small id="helpEmail" class="form-text text-muted">You can use any email that you've use on our site</small>
+                </div>
+                <div class="form-group">
                   <label for="Birthday">Birthday</label>
                   <input type="date" v-model="data.Birthday"
                     class="form-control" name="Birthday" id="Birthday" aria-describedby="helpBirthday" placeholder="Your Birthday">
@@ -63,7 +69,6 @@
 import { Globals } from "@/models/api";
 import { Register } from "@/models/users";
 import toastr from 'toastr';
-import 'toastr/build/toastr.css';
 
 export default {
     data: () => ({
@@ -78,7 +83,7 @@ export default {
               toastr.success("You've registered successfully!")
             } catch (error) {
               Globals.errors.push(error);
-              toastr.error(error.msg);
+              toastr.error(error.message);
             }
         }
     }
