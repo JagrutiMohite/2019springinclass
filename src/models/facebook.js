@@ -1,3 +1,4 @@
+import { oAuthLogin } from "./users";
 
 window.fbAsyncInit = function() {
     FB.init({
@@ -16,24 +17,26 @@ window.fbAsyncInit = function() {
   };
 
   (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 
-   export function Login(){
-        return new Promise( (resolve, reject) => {
-            FB.login(function(response) {
-                console.log(response);
-                if(response.status === "connected"){
-                    FB.api("me?fields=id,name,email", response2 => {
-                        resolve(response2);
-                    })
-                }else{
-                    reject(Error("User did not log in"))
-                }
-            }, {scope: 'public_profile,email'});
-        })
-   }
+  export function Login(){
+       return new Promise( (resolve, reject) => {
+           FB.login(function(response) {
+               console.log(response);
+               if(response.status === "connected"){
+                   FB.api("me?fields=id,name,email", response2 => {
+                       oAuthLogin(response.authResponse.accessToken, response2.id)
+                       .then(x=> resolve({ x, response2 }))
+                       
+                   })
+               }else{
+                   reject(Error("User did not log in"))
+               }
+           }, {scope: 'public_profile,email'});
+       })
+  }

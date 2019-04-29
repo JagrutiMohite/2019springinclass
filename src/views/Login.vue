@@ -21,7 +21,7 @@
             <form @submit.prevent="submit">
                 <div class="form-group">
                   <label for="Email">Email</label>
-                  <input type="text" v-model="data.Email"
+                  <input type="text" v-model="data.email"
                     class="form-control" name="Email" id="Email" aria-describedby="helpEmail" placeholder="Email">
                   <small id="helpEmail" class="form-text text-muted">You can use any email that you've use on our site</small>
                 </div>
@@ -44,8 +44,8 @@
 <script>
 import { Globals } from "@/models/api";
 import { Login } from "@/models/users";
-import toastr from 'toastr';
 import * as fb from "@/models/facebook";
+import toastr from 'toastr';
 export default {
     data: ()=> ({
         data: {},
@@ -54,7 +54,7 @@ export default {
     methods: {
         async submit(){
             try {
-              const m = await Login(this.data);
+              await Login(this.data);
               this.$router.push(Globals.redirectRoute)
               toastr.success("You've logged in successfully!")
             } catch (error) {
@@ -65,7 +65,6 @@ export default {
         async facebookLogin(){
           const m = await fb.Login();
           console.log( {m} );
-          Globals.user = { FirstName: m.name, Email: m.email }
         }
     }
 }
