@@ -1,6 +1,7 @@
 const express   = require('express');
 const path      = require('path');
 const users     = require('./controllers/users');
+const stripeController     = require('./controllers/stripe');
 const userModel     = require('./models/user');
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(function(req, res, next) {
   }
   next();
 });
+app.use('/stripe', stripeController);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
