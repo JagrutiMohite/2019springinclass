@@ -15,6 +15,12 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/myfriends">My Friends</router-link>
                 </li>
+                 <li class="nav-item">
+                    <router-link class="nav-link" to="/Cart">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        Cart
+                    </router-link>
+                </li>
                 <li class="nav-item">
                     <router-link class="nav-link disabled" to="#">Disabled</router-link>
                 </li>

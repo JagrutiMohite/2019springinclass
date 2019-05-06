@@ -65,6 +65,7 @@ export default {
         async facebookLogin(){
           const m = await fb.Login();
           console.log( {m} );
+          this.$router.push(Globals.redirectRoute)
         }
     }
 }

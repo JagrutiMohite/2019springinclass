@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import MyFriends from './views/MyFriends.vue'
 import Register from './views/Register.vue'
+import Cart from "./views/ShoppingCart.vue";
 import Login from "./views/Login.vue";
 import { Globals } from '@/models/api';
 
@@ -41,11 +42,8 @@ const router = new Router({
       name: 'register',
       component: Register
     },
-    {
-      path: '/Login',
-      name: 'login',
-      component: Login
-    }
+    { path: '/Login', name: 'login', component: Login },
+    { path: '/Cart', name: 'cart', component: Cart }
   ]
 })
 router.beforeEach((to, from, next)=>{
